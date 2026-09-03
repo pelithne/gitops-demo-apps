@@ -1,0 +1,36 @@
+name: Validate GitOps manifests
+
+on:
+  pull_request:
+    paths:
+      - "apps/**"
+      - ".github/workflows/validate.yaml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v4
+      - name: Render applications
+        run: |
+          mkdir -p .tmp
+          kubectl kustomize apps/flux-demo > .tmp/flux-demo.yaml
+          kubectl kustomize apps/argocd-demo > .tmp/argocd-demo.yaml
+      - name: Validate Kubernetes schemas
+        run: |
+          docker run --rm -v "$PWD:/work" ghcr.io/yannh/kubeconform:v0.7.0 \
+            -strict -summary /work/.tmp/flux-demo.yaml /work/.tmp/argocd-demo.yaml
+      - name: Reject plaintext Secret resources
+        run: |
+          if grep -R --include='*.yaml' --include='*.yml' -nE '^kind:[[:space:]]*Secret[[:space:]]*$' apps; then
+            echo "Plain Kubernetes Secret resources are not allowed."
+            exit 1
+          fi
