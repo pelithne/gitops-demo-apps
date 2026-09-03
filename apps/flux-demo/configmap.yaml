@@ -10,7 +10,7 @@ data:
       <head><meta charset="utf-8"><title>Flux GitOps Demo</title></head>
       <body style="font-family: sans-serif; max-width: 48rem; margin: 4rem auto; background: #102a43; color: white;">
         <h1>Flux reconciled this application</h1>
-        <p>Version: v2</p>
+        <p>Version: v3</p>
         <p>Desired state lives in Git. Try changing this page through a pull request.</p>
       </body>
     </html>
