@@ -10,7 +10,7 @@ data:
       <head><meta charset="utf-8"><title>Argo CD GitOps Demo</title></head>
       <body style="font-family: sans-serif; max-width: 48rem; margin: 4rem auto; background: #6b2d5c; color: white;">
         <h1>Argo CD synchronized this application</h1>
-        <p>Version: v1</p>
+        <p>Version: v2</p>
         <p>Use the Argo CD resource tree to compare desired and live state.</p>
       </body>
     </html>
