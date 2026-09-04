@@ -4,6 +4,7 @@ metadata:
   name: demo-web
   namespace: argocd-demo
 spec:
+  type: LoadBalancer
   selector:
     app.kubernetes.io/name: argocd-demo-web
   ports:

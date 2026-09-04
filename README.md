@@ -5,7 +5,7 @@ Public desired-state repository used by the managed Flux and Argo CD workshop.
 - `apps/flux-demo` is reconciled by the Azure-managed Flux extension.
 - `apps/argocd-demo` is reconciled by the Azure-managed Argo CD extension.
 
-The applications are intentionally similar but use separate namespaces so the controllers never compete for ownership.
+The applications are intentionally similar but use separate namespaces so the controllers never compete for ownership. Each application uses a `LoadBalancer` Service to request a public endpoint from Azure.
 
 ## Demo workflow
 
